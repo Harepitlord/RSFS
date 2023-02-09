@@ -1,5 +1,5 @@
 """
-WSGI config for RSFS project.
+WSGI config for hub project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

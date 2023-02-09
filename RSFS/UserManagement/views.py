@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, UpdateView
@@ -16,7 +15,8 @@ backend = 'UserManagement.backend.EmailBackend'
 class Signup(CreateView):
     model = get_user_model()
     form_class = forms.NewUser
-    success_url = reverse_lazy("Handler:Dashboard")
+    template_name = 'UserManagement/Signup.html'
+    success_url = reverse_lazy("hub:Dashboard")
 
     def form_valid(self, form):
         form.save(commit=True)
@@ -26,15 +26,10 @@ class Signup(CreateView):
 
 
 class Login(LoginView):
-    template_name = 'UserManagement/login.html'
+    template_name = 'UserManagement/Login.html'
 
 class Logout(LogoutView):
-    next_page = reverse_lazy("UserManagement:Home")
+    next_page = reverse_lazy("hub:Home")
 
-class DashBoard(LoginRequiredMixin,View):
-    login_url = reverse_lazy('UserManagement:Login')
-
-    def get(self,request):
-        return render(request=request,template_name="UserManagement.html")
 
 
