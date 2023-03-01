@@ -12,6 +12,7 @@ from . import models
 
 backend = 'UserManagement.backend.EmailBackend'
 
+
 class Signup(CreateView):
     model = get_user_model()
     form_class = forms.NewUser
@@ -20,16 +21,14 @@ class Signup(CreateView):
 
     def form_valid(self, form):
         form.save(commit=True)
-        user = authenticate(username=form.cleaned_data['email'],password=form.cleaned_data['password'])
-        login(request=self.request,user=user)
+        user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+        login(request=self.request, user=user)
         return redirect(to=self.success_url)
 
 
 class Login(LoginView):
     template_name = 'UserManagement/Login.html'
 
+
 class Logout(LogoutView):
     next_page = reverse_lazy("hub:Home")
-
-
-

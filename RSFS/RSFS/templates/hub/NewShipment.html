@@ -1,0 +1,25 @@
+{% extends 'RSFS/LoginBase.html' %}
+
+{% block staticResouces %}
+    {% load static %}
+    {% load myfilters %}
+    <link rel = "stylesheet" type="text/css" href="{% static 'RSFS/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="signDiv">
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class = "fieldWrapper">
+                {{ field.errors }}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text | safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </form>
+    </div>
+{% endblock %}

@@ -61,7 +61,7 @@ ROOT_URLCONF = 'RSFS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [f"{BASE_DIR}/templates",],
+        'DIRS': [f"{BASE_DIR}/RSFS/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +73,8 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_ROOT="/RSFS/templates"
 
 WSGI_APPLICATION = 'RSFS.wsgi.application'
 
@@ -145,7 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'RSFS/media/')
 MEDIA_URL = '/RSFS/Media/'
 
 STATICFILES_DIRS = [
-    'UserManagement/static/',
+    'RSFS/static/',
 ]
 
 STATICFILES_FINDERS = [
