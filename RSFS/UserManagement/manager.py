@@ -1,6 +1,31 @@
-from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import BaseUserManager, Group
 from django.utils import timezone
+from .models import User
 
+
+class UserGroups:
+    Authority, created1 = Group.objects.get_or_create(name="Authority")
+    Logistics, created2 = Group.objects.get_or_create(name="Logistics")
+    Shipper, created3 = Group.objects.get_or_create(name="Shipper")
+
+    ROLES_Map = (
+        ("Authority", Authority),
+        ("Logistics", Logistics),
+        ("Shipper", Shipper)
+    )
+    ROLES = (
+        "Authority", "Logistics", "Shipper"
+    )
+
+    def get_permission_group(self, role: int):
+        if role == User.Authority:
+            return self.Authority
+
+        if role == User.Logistics:
+            return self.Logistics
+
+        if role == User.Shipper:
+            return self.Shipper
 
 
 class UserManager(BaseUserManager):
@@ -20,6 +45,7 @@ class UserManager(BaseUserManager):
             **extra_fields
         )
         user.set_password(password)
+        user.groups.add(UserGroups().get_permission_group(role=extra_fields['role']))
         user.save(using=self._db)
         return user
 
