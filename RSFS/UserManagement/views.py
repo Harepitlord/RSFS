@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import View
 
+from .modelHelper import UserGroups
 from . import forms
 from . import models
 
@@ -24,7 +25,7 @@ class Signup(CreateView):
         user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
         if user is None:
             self.form_invalid(form)
-        self.success_url = reverse_lazy(f"hub:{forms.UserGroups.ROLES_Map[user.role - 1]}Dashboard")
+        self.success_url = reverse_lazy(f"hub:{UserGroups.ROLES_Map[user.role - 1]}Dashboard")
         login(request=self.request, user=user)
         return redirect(to=self.success_url)
 
@@ -37,7 +38,7 @@ class Login(LoginView):
         if user is None:
             self.form_invalid(form)
         login(self.request, form.get_user())
-        self.success_url = reverse_lazy(f"hub:{forms.UserGroups.ROLES_Map[user.role - 1]}Dashboard")
+        self.success_url = reverse_lazy(f"hub:{UserGroups.ROLES_Map[user.role - 1]}Dashboard")
         return redirect(to=self.success_url)
 
 

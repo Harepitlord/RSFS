@@ -1,4 +1,9 @@
-{% extends base %}
+{% if request.user.is_authenticated %}
+    {% extends 'RSFS/LoginBase.html' %}
+    {% else %}
+    {% extends 'RSFS/NonLoginBase.html' %}
+{% endif %}
+
 
 
 {% block staticResourses %}

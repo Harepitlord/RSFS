@@ -12,4 +12,4 @@ class CargoForm(forms.ModelForm):
 class ShipmentForm(forms.ModelForm):
     class Meta:
         model = models.Shipment
-        fields = ("Shipper_Name", "Shipment_Company", "Receiver_Name", "Source", "Destination", "Cargo_Doc")
+        fields = ("Shipper_Name", "Shipment_Company", "Receiver_Name", "Source", "Destination")
