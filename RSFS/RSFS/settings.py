@@ -132,22 +132,22 @@ STATIC_ROOT= "RSFS/static/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL='UserManagement.User'
+AUTH_USER_MODEL='UserManagement.CustomUser'
 
 # Authentication backends
 
 AUTHENTICATION_BACKENDS = [
-    'UserManagement.backend.EmailBackend',
+    # 'UserManagement.backend.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Media root folder
 MEDIA_ROOT = os.path.join(BASE_DIR,'RSFS/media/')
 
-MEDIA_URL = '/RSFS/Media/'
+MEDIA_URL = 'RSFS/Media/'
+
 
 STATICFILES_DIRS = [
-    'RSFS/static/',
 ]
 
 STATICFILES_FINDERS = [

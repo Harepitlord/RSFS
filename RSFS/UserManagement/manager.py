@@ -1,6 +1,7 @@
 from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
 
+from .modelHelper import UserGroups
 
 
 class UserManager(BaseUserManager):
@@ -20,6 +21,7 @@ class UserManager(BaseUserManager):
             **extra_fields
         )
         user.set_password(password)
+        user.groups.add(UserGroups().get_permission_group(role=extra_fields['role']))
         user.save(using=self._db)
         return user
 

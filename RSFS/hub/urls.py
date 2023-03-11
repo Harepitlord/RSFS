@@ -23,4 +23,8 @@ urlpatterns = [
     path('home',views.DashBoard.as_view(),name='Dashboard'),
     path('about',views.About.as_view(),name='About'),
     path('makeShipment',views.NewShipment.as_view(),name='NewShipment'),
+
+    path('shipper/home',views.ShipperDashboard.as_view(),name='ShipperDashboard'),
+    path('logistics/home',views.LogisticsDashboard.as_view(),name='LogisticsDashboard'),
+
 ]

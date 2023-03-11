@@ -31,4 +31,27 @@
             His career has been characterized by critical and popular success in his youth
         </label>
     </div>
+    <table>
+    <tr>
+        <th>Receiver Name</th>
+        <th>Shipping company</th>
+        <th>Source</th>
+        <th>Destination</th>
+    </tr>
+        {% for shipment in shipmentList  %}
+            <tr>
+                <td>{% shipment.ReceiverName %}</td>
+                <td>{% shipment.ShipmentCompany %}</td>
+                <td>{% shipment.source %}</td>
+                <td>{% shipment.destination %}</td>
+                <td>
+                    <form method="post" action="{% url 'hub:ShipperShipmentList' shipmentId=shipment.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">View Details</button>
+                    </form>
+                </td>
+            </tr>
+
+        {% endfor %}
+    </table>
 {% endblock %}
